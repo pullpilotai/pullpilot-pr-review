@@ -1,0 +1,20 @@
+# action.yml
+name: 'Pull Pilot AI'
+description: 'Pull requests reviewed for you. Make sense of changes,  optimize the code, discover potential security issues, and more.'
+inputs:
+  token:
+    description: 'Github token of the repository (automatically created by Github)'
+    required: true
+  pull_pilot_token:  # id of input
+    description: 'Your Pull Pilot API Token'
+    required: true
+  pull_pilot_retry:
+    description: 'The length of time to wait between retries fetching the job results'
+    required: false
+outputs:
+  feedback:
+    description: 'The feedback from the engine'
+
+runs:
+  using: 'node16'
+  main: 'lib/index.js'
