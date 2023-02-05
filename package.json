@@ -1,0 +1,45 @@
+{
+  "name": "pullpilot-pr-review",
+  "description": "GitHub action provides reviews and recommendations on your Pull Requests",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "ncc build src/main.ts -o lib",
+    "lint": "prettier --write **/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pullpilotai/pullpilot-pr-review"
+  },
+  "keywords": [
+    "actions",
+    "container",
+    "pull-request",
+    "comment",
+    "message",
+    "review",
+    "chatgpt",
+    "ai"
+  ],
+  "author": "Pull Pilot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pullpilotai/pullpilot-pr-review/issues"
+  },
+  "homepage": "https://github.com/pullpilotai/pullpilot-pr-review#readme",
+  "dependencies": {
+    "@actions/core": "^1.9.0",
+    "@actions/exec": "^1.0.0",
+    "@actions/github": "^5.0.3",
+    "@actions/http-client": "^2.0.1",
+    "@actions/io": "^1.0.0",
+    "@actions/tool-cache": "^2.0.1",
+    "fetch": "^1.1.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.11.18",
+    "@vercel/ncc": "^0.36.1",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.5"
+  }
+}
