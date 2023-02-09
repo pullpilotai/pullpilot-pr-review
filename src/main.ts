@@ -28,6 +28,8 @@ async function run(): Promise<void> {
     const pull_pilot_token = core.getInput("pull_pilot_token", { required: true});
     const pull_pilot_retry_seconds = core.getInput("pull_pilot_retry", { required: false }) || 10;
 
+    const baseUrl = "https://api.pullpilot.ai";
+
     const client = getOctokit(github_token);
 
     // Get event name.
@@ -64,7 +66,7 @@ async function run(): Promise<void> {
     const diff = response.data;
 
     const http: HttpClient = new HttpClient('pullpilot-ga');
-    const jobUri = "https://pull-pilot-api-v4.fly.dev/recommend";
+    const jobUri = `${baseUrl}/recommend`;
 
     if (JSON.stringify(diff).length / 2.5 > 5000) {
       core.info("Pull Pilot: This is a pretty large diff file. It might take a good few minutes for this run to complete.");
@@ -93,7 +95,7 @@ async function run(): Promise<void> {
     }
 
     const jobUuid = body.job_uuid;
-    const checkUri = `https://pull-pilot-api-v4.fly.dev/recommend/${jobUuid}`;
+    const checkUri = `${baseUrl}/recommend/${jobUuid}`;
 
     /**
      * Then we will be polling to figure out whether
