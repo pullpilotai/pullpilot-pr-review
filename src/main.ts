@@ -26,7 +26,7 @@ async function run(): Promise<void> {
     // Create GitHub client with the API token.
     const github_token = core.getInput("token", { required: true })
     const pull_pilot_token = core.getInput("pull_pilot_token", { required: true});
-    const pull_pilot_retry_seconds = core.getInput("pull_pilot_retry", { required: false }) || 10;
+    const pull_pilot_retry_seconds = core.getInput("pull_pilot_retry", { required: false }) || 20;
 
     const baseUrl = "https://api.pullpilot.ai";
 
