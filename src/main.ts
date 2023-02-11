@@ -29,7 +29,8 @@ async function run(): Promise<void> {
     const pullPilotMode = core.getInput("pull_pilot_mode", { required: false}) || "brief";
     const pullPilotRetrySeconds = core.getInput("pull_pilot_retry", { required: false }) || 20;
 
-    const baseUrl = "https://api.pullpilot.ai";
+    //const baseUrl = "https://api.pullpilot.ai";
+    const baseUrl = "https://67c6-2001-4bb8-190-6e43-8470-6cfc-2416-44c3.eu.ngrok.io";
 
     const client = getOctokit(githubToken);
 
