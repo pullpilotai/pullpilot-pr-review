@@ -63,17 +63,16 @@ async function run(): Promise<void> {
       );
     }
 
-    const gitignoreResponse = await client.rest.repos.get({
+    let content = false;
+    const gitignoreResponse = await client.rest.repos.getContent({
       owner: context.repo.owner,
       repo: context.repo.repo,
       path: '.gitignore',
+    }).then(result => {
+      // @ts-ignore
+      content = result.data?.content || 'NOOO';
     });
 
-    console.log("status: ");
-    console.log(gitignoreResponse.status);
-
-    // @ts-ignore
-    const content = gitignoreResponse.data || 'NOEEEE'
     console.log(content);
     return;
 
