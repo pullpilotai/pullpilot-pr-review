@@ -69,7 +69,9 @@ async function run(): Promise<void> {
       path: '.gitignore',
     }).then(result => {
       // content will be base64 encoded
-      console.info(result)
+      // @ts-ignore
+      const content = Buffer.from(result.data?.content, 'base64').toString()
+      console.log(content);
     });
     return;
 
