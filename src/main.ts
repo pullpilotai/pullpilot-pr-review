@@ -77,7 +77,7 @@ async function run(): Promise<void> {
       // Ignore.
     }
     console.log('Gitignore: ');
-    console.log(gitignoreContent);
+    console.log(JSON.stringify(gitignoreContent));
     return;
 
     // The diff received from the pull request.
