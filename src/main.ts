@@ -69,12 +69,12 @@ async function run(): Promise<void> {
       const {data} = await client.rest.repos.getContent({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        path: '.gitignorez',
+        path: '.gitignore',
       });
       // @ts-ignore
-      gitignoreContent = data.content;
-    } catch (e) {
-      console.log("Here: ", e.toString());
+      gitignoreContent = Buffer.from(data.content, data.encoding).toString();
+    } catch (notFound) {
+      // Ignore.
     }
     console.log('Gitignore: ');
     console.log(gitignoreContent);
