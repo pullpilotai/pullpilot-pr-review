@@ -71,7 +71,7 @@ async function run(): Promise<void> {
     }).then(result => {
       // @ts-ignore
       content = result.data?.content || 'NOOO';
-    });
+    }).then(err => console.log(err));
 
     console.log(content);
     return;
