@@ -24,14 +24,15 @@ interface PullPilotJobResponseData {
 async function run(): Promise<void> {
   try {
     // Create GitHub client with the API token.
-    const github_token = core.getInput("token", { required: true })
-    const pull_pilot_token = core.getInput("pull_pilot_token", { required: true});
-    const pull_pilot_retry_seconds = core.getInput("pull_pilot_retry", { required: false }) || 20;
+    const githubToken = core.getInput("token", { required: true })
+    const pullPilotToken = core.getInput("pull_pilot_token", { required: true});
+    const pullPilotMode = core.getInput("pull_pilot_mode", { required: false}) || "brief";
+    const pullPilotRetrySeconds = core.getInput("pull_pilot_retry", { required: false }) || 20;
 
     //const baseUrl = "https://api.pullpilot.ai";
     const baseUrl = "https://1011-2001-4bb8-190-6e43-8078-c8f9-bf1e-2293.eu.ngrok.io"
 
-    const client = getOctokit(github_token);
+    const client = getOctokit(githubToken);
 
     // Get event name.
     const eventName = context.eventName;
@@ -76,15 +77,12 @@ async function run(): Promise<void> {
     } catch (notFound) {
       // Ignore.
     }
-    console.log('Gitignore: ');
-    console.log(JSON.stringify(gitignoreContent));
-    return;
 
     // The diff received from the pull request.
     const diff = response.data;
 
     const http: HttpClient = new HttpClient('pullpilot-ga');
-    const jobUri = `${baseUrl}/recommend`;
+    const jobUri = `${baseUrl}/recommend/${pullPilotMode}`;
 
     if (JSON.stringify(diff).length / 2.5 > 5000) {
       core.info("Pull Pilot: This is a pretty large diff file. It might take a good few minutes for this run to complete.");
@@ -96,7 +94,7 @@ async function run(): Promise<void> {
       pr_number: context.payload.pull_request?.number,  // Optional PR number.
       repo: context.payload.repository.name  // Optional Repository Name.
     }, {
-      "X_PULLPILOT_KEY": `${pull_pilot_token}`
+      "X_PULLPILOT_KEY": `${pullPilotToken}`
     });
 
     /**
@@ -126,7 +124,7 @@ async function run(): Promise<void> {
      * Usage:
      *   In your action definition, you can pass: pull_pilot_retry: 10
      */
-    const pollSeconds = Number(pull_pilot_retry_seconds);
+    const pollSeconds = Number(pullPilotRetrySeconds);
 
     /**
      * Let the user know if it fails, we should get to here.
@@ -140,7 +138,7 @@ async function run(): Promise<void> {
       let pullPilotResponse;
       try {
         pullPilotResponse = await http.getJson<PullPilotResponseData>(checkUri, {
-          "X_PULLPILOT_KEY": `${pull_pilot_token}`
+          "X_PULLPILOT_KEY": `${pullPilotToken}`
         });
       } catch (e) {
         core.setFailed(
