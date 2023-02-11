@@ -67,16 +67,11 @@ async function run(): Promise<void> {
       owner: context.repo.owner,
       repo: context.repo.repo,
       path: '.gitignorez',
-    }).then(result => {
-      // content will be base64 encoded
-      // @ts-ignore
-      const content = Buffer.from(result.data?.content, 'base64').toString()
-      if (!content) {
-        console.log("Nopppeeeee");
-      } else {
-        console.log(content);
-      }
     });
+
+    // @ts-ignore
+    const content = gitignoreResponse.data?.content || 'NOEEEE'
+    console.log(content);
     return;
 
     // The diff received from the pull request.
