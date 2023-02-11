@@ -67,7 +67,7 @@ async function run(): Promise<void> {
     const gitignoreResponse = await client.rest.repos.getContent({
       owner: context.repo.owner,
       repo: context.repo.repo,
-      path: '.gitignore',
+      path: '.gitignorez',
     }).then(result => {
       // @ts-ignore
       content = result.data?.content || 'NOOO';
