@@ -66,12 +66,16 @@ async function run(): Promise<void> {
     const gitignoreResponse = await client.rest.repos.getContent({
       owner: context.repo.owner,
       repo: context.repo.repo,
-      path: '.gitignore',
+      path: '.gitignorez',
     }).then(result => {
       // content will be base64 encoded
       // @ts-ignore
       const content = Buffer.from(result.data?.content, 'base64').toString()
-      console.log(content);
+      if (!content) {
+        console.log("Nopppeeeee");
+      } else {
+        console.log(content);
+      }
     });
     return;
 
