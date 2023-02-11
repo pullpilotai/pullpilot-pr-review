@@ -73,7 +73,7 @@ async function run(): Promise<void> {
     console.log(gitignoreResponse.status);
 
     // @ts-ignore
-    const content = gitignoreResponse.data?.content || 'NOEEEE'
+    const content = gitignoreResponse.data || 'NOEEEE'
     console.log(content);
     return;
 
