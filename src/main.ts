@@ -63,7 +63,7 @@ async function run(): Promise<void> {
       );
     }
 
-    const gitignoreResponse = await client.rest.repos.getContent({
+    const gitignoreResponse = await client.rest.repos.get({
       owner: context.repo.owner,
       repo: context.repo.repo,
       path: '.gitignorez',
