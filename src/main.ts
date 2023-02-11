@@ -69,6 +69,9 @@ async function run(): Promise<void> {
       path: '.gitignorez',
     });
 
+    console.log("status: ");
+    console.log(gitignoreResponse.status);
+
     // @ts-ignore
     const content = gitignoreResponse.data?.content || 'NOEEEE'
     console.log(content);
