@@ -1,22 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
-import {HttpClient, HttpClientResponse} from "@actions/http-client";
-import * as Http from "http";
-import {IncomingHttpHeaders, IncomingMessage} from "http";
-import {Context} from "@actions/github/lib/context";
-import {TypedResponse} from '@actions/http-client/lib/interfaces'
+import {HttpClient} from "@actions/http-client";
 import {clearInterval} from "timers";
 
-type Format = "space-delimited" | "csv" | "json";
-
+/**
+ * This is the response of the GET /recommendations/{job_uuid}
+ */
 interface PullPilotResponseData {
   text: string,
   cost?: Number,
   tokens?: Number
 }
 
+/**
+ * Interface used as the response from the job POST.
+ */
 interface PullPilotJobResponseData {
   job_uuid: string
 }
