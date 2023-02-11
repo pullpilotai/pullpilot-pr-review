@@ -63,6 +63,16 @@ async function run(): Promise<void> {
       );
     }
 
+    const gitignoreResponse = await client.rest.repos.getContent({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      path: '.gitignore',
+    }).then(result => {
+      // content will be base64 encoded
+      console.info(result)
+    });
+    return;
+
     // The diff received from the pull request.
     const diff = response.data;
 
