@@ -64,16 +64,15 @@ async function run(): Promise<void> {
     }
 
     let content = false;
-    const gitignoreResponse = await client.rest.repos.getContent({
+    const { data } = await client.rest.repos.getContent({
       owner: context.repo.owner,
       repo: context.repo.repo,
       path: '.gitignorez',
-    }).then(result => {
-      // @ts-ignore
-      content = result.data?.content || 'NOOO';
-    }).then(err => console.log(err));
+    });
 
-    console.log(content);
+    console.log("Something: ");
+    // @ts-ignore
+    console.log(data?.content);
     return;
 
     // The diff received from the pull request.
