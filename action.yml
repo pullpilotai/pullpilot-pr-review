@@ -11,6 +11,9 @@ inputs:
   pull_pilot_retry:
     description: 'The length of time to wait between retries fetching the job results'
     required: false
+  pull_pilot_mode:
+    description: 'The mode to use: brief or full'
+    required: false
 outputs:
   feedback:
     description: 'The feedback from the engine'
